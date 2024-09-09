@@ -9,28 +9,28 @@ import { SignIn } from './services/Auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import jwtDecode from 'jwt-decode';
 
-export default function Login({ navigation }:any) {
-  const [email, setEmail]=useState('');
-  const [senha, setSenha]=useState('');
-  const [loading, setLoading] =useState(true);
+export default function Login({ navigation }: any) {
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const toast = useToast();
 
-  useEffect(()=>{
+  useEffect(() => {
     async function checkLogin() {
-      const token =await AsyncStorage.getItem('token')
-      if(token){
+      const token = await AsyncStorage.getItem('token')
+      if (token) {
         navigation.replace('Cadastro')
       }
       setLoading(false);
     }
     checkLogin()
-  },[])
+  }, [])
 
-  async function login(){
-    const response  = await SignIn(email, senha)
-    if(response){
-      const {token} = response;
+  async function login() {
+    const response = await SignIn(email, senha)
+    if (response) {
+      const { token } = response;
       AsyncStorage.setItem('token', token);
 
       const tokenDecodificado = jwtDecode(token) as any;
@@ -38,16 +38,16 @@ export default function Login({ navigation }:any) {
       AsyncStorage.setItem('pacientId', pacienteId);
 
       navigation.replace('Tabs')
-    }else{
+    } else {
       toast.show({
-        title:"Erro no login",
-        description:"O email ou senha não conferem",
-        backgroundColor:"red.500"
+        title: "Erro no login",
+        description: "O email ou senha não conferem",
+        backgroundColor: "red.500"
       })
     }
   }
 
-  if(loading){
+  if (loading) {
     return null
   }
   return (
