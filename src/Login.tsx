@@ -4,8 +4,16 @@ import Logo from './assets/Logo.png'
 import { Botao } from './componentes/Botao';
 import { EntradaTexto } from './componentes/EntradaTexto';
 import { Titulo } from './componentes/Titulo';
+import { useState } from 'react';
+import { SignIn } from './services/Auth';
 
 export default function Login({ navigation }:any) {
+  const [email, setEmail]=useState('');
+  const [password, setPassword]=useState('')
+
+  async function login(){
+    const response = await SignIn
+  }
   return (
     <VStack flex={1} alignItems="center" justifyContent="center" p={5}>
       <Image source={Logo} alt="Logo Voll" />
@@ -17,10 +25,15 @@ export default function Login({ navigation }:any) {
         <EntradaTexto
           label="Email"
           placeholder="Insira seu endereço de e-mail"
+          value={email}
+          onChangeText={setEmail}
         />
         <EntradaTexto
           label="Senha"
           placeholder="Insira sua senha"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
         />
       </Box>
       <Botao onPress={() => navigation.navigate('Tabs')}>Entrar</Botao>

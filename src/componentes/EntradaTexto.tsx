@@ -5,13 +5,16 @@ interface InputProps {
   placeholder: string;
   secureTextEntry?: boolean;
   leftIcon?: React.ReactNode;
+  value?: string;
+  onChangeText?: (text: string) => void;
 }
 
-export function EntradaTexto ({ 
-  label, 
-  placeholder, 
-  secureTextEntry = false
-} : InputProps) : JSX.Element {
+export function EntradaTexto({
+  label,
+  placeholder,
+  secureTextEntry = false,
+  value, onChangeText
+}: InputProps): JSX.Element {
   return (
     <FormControl mt={3}>
       {label && <FormControl.Label>{label}</FormControl.Label>}
@@ -23,6 +26,8 @@ export function EntradaTexto ({
         bgColor="gray.100"
         secureTextEntry={secureTextEntry}
         shadow={3}
+        value={value}
+        onChangeText={onChangeText}
       />
     </FormControl>
   );
