@@ -5,7 +5,7 @@ import { Botao } from './componentes/Botao';
 import { EntradaTexto } from './componentes/EntradaTexto';
 import { Titulo } from './componentes/Titulo';
 
-export default function Login({ navigation }) {
+export default function Login({ navigation }:any) {
   return (
     <VStack flex={1} alignItems="center" justifyContent="center" p={5}>
       <Image source={Logo} alt="Logo Voll" />
