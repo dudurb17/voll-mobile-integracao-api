@@ -20,7 +20,7 @@ export default function Login({ navigation }:any) {
     async function checkLogin() {
       const token =await AsyncStorage.getItem('token')
       if(token){
-        navigation.replace('Tabs')
+        navigation.replace('Cadastro')
       }
       setLoading(false);
     }
