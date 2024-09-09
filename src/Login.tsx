@@ -1,4 +1,4 @@
-import { VStack, Image, Text, Box, Link } from 'native-base'
+import { VStack, Image, Text, Box, Link, useToast } from 'native-base'
 import { TouchableOpacity } from 'react-native';
 import Logo from './assets/Logo.png'
 import { Botao } from './componentes/Botao';
@@ -11,12 +11,18 @@ export default function Login({ navigation }:any) {
   const [email, setEmail]=useState('');
   const [senha, setSenha]=useState('')
 
+  const toast = useToast();
+
   async function login(){
     const response = await SignIn(email, senha)
     if(response){
       navigation.replace('Tabs')
     }else{
-      console.log("erro")
+      toast.show({
+        title:"Erro no login",
+        description:"O email ou senha não conferem",
+        backgroundColor:"red.500"
+      })
     }
   }
   return (
