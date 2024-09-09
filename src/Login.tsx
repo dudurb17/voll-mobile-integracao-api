@@ -9,10 +9,15 @@ import { SignIn } from './services/Auth';
 
 export default function Login({ navigation }:any) {
   const [email, setEmail]=useState('');
-  const [password, setPassword]=useState('')
+  const [senha, setSenha]=useState('')
 
   async function login(){
-    const response = await SignIn
+    const response = await SignIn(email, senha)
+    if(response){
+      navigation.replace('Tabs')
+    }else{
+      console.log("erro")
+    }
   }
   return (
     <VStack flex={1} alignItems="center" justifyContent="center" p={5}>
@@ -31,12 +36,12 @@ export default function Login({ navigation }:any) {
         <EntradaTexto
           label="Senha"
           placeholder="Insira sua senha"
-          value={password}
-          onChangeText={setPassword}
+          value={senha}
+          onChangeText={setSenha}
           secureTextEntry
         />
       </Box>
-      <Botao onPress={() => navigation.navigate('Tabs')}>Entrar</Botao>
+      <Botao onPress={login}>Entrar</Botao>
 
       <Link href='https://www.alura.com.br' mt={2}>
         Esqueceu sua senha?

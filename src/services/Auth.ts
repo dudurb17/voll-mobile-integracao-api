@@ -1,17 +1,17 @@
-import { err } from "react-native-svg/lib/typescript/xml";
 import api from "./api";
 
-export async function SignIn(email: string, password: string) {
-  if (!email || !password) return null;
+export async function SignIn(email: string, senha: string) {
+  if (!email || !senha) return null;
 
   try {
     const response = await api.post("/auth/login", {
       email,
-      password,
+      senha,
     });
 
     console.log(response.data)
     return response.data;
+    
   } catch (error) {
     console.log(error);
     return null;
