@@ -1,30 +1,36 @@
-import {
-  VStack,
-  Image,
-  Text,
-  Box,
-  Link,
-  Checkbox,
-  ScrollView,
-} from "native-base";
+import { Image, Text, Box, ScrollView } from "native-base";
 import { useState } from "react";
-import { TouchableOpacity } from "react-native";
 import Logo from "./assets/Logo.png";
 import { Botao } from "./componentes/Botao";
 import { EntradaTexto } from "./componentes/EntradaTexto";
 import { Titulo } from "./componentes/Titulo";
 import { secoes } from "./utils/CadastroEntradaTexto";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
 
 export default function Cadastro() {
   const [numSecao, setNumSecao] = useState(0);
   const [data, setData] = useState({} as any);
+  const [planos, setPlanos] = useState([] as number[]);
+
+  const handlePress = (id: number) => {
+    setPlanos((prevPlanos) => {
+      if (prevPlanos.includes(id)) {
+        return prevPlanos.filter((planId) => planId !== id);
+      } else {
+        return [...prevPlanos, id];
+      }
+    });
+  };
+
+  const Checked = (id: number) => {
+    return planos.includes(id);
+  };
 
   function avancarSecao() {
     if (numSecao < secoes.length - 1) {
       setNumSecao(numSecao + 1);
-    }else
-    {
-      console.log(data)
+    } else {
+      console.log(data);
     }
   }
 
@@ -52,20 +58,33 @@ export default function Cadastro() {
               key={entrada.id}
               secureTextEntry={entrada.secureTextEntry}
               value={data[entrada.name]}
-              onChangeText={(text)=>updateData(entrada.name, text)}
+              onChangeText={(text) => updateData(entrada.name, text)}
             />
           );
         })}
       </Box>
       <Box>
-        <Text color="blue.800" fontWeight="bold" fontSize="md" mt="2" mb={2}>
-          Selecione o plano:
-        </Text>
+        {numSecao == 2 && (
+          <Text color="blue.800" fontWeight="bold" fontSize="md" mt="2" mb={2}>
+            Selecione o plano:
+          </Text>
+        )}
         {secoes[numSecao].checkbox.map((checkbox) => {
           return (
-            <Checkbox key={checkbox.id} value={checkbox.value}>
-              {checkbox.value}
-            </Checkbox>
+            <TouchableOpacity
+              onPress={() => handlePress(checkbox.id)}
+              style={styles.container}
+            >
+              <View
+                style={[
+                  styles.checkbox,
+                  Checked(checkbox.id) && styles.checked,
+                ]}
+              >
+                {Checked(checkbox.id) && <View style={styles.innerCheck} />}
+              </View>
+              <Text style={styles.label}>{checkbox.value}</Text>
+            </TouchableOpacity>
           );
         })}
       </Box>
@@ -80,3 +99,33 @@ export default function Cadastro() {
     </ScrollView>
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 2,
+  },
+  checkbox: {
+    width: 24,
+    height: 24,
+    borderWidth: 2,
+    borderRadius: 4,
+    borderColor: "#4F46E5",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 10,
+  },
+  checked: {
+    backgroundColor: "#4F46E5",
+  },
+  innerCheck: {
+    width: 12,
+    height: 12,
+    backgroundColor: "#fff",
+    borderRadius: 2,
+  },
+  label: {
+    fontSize: 16,
+    color: "black",
+  },
+});
