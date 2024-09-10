@@ -32,6 +32,7 @@ export default function Cadastro() {
       setNumSecao(numSecao + 1);
     } else {
       console.log(data);
+      cadastrar()
     }
   }
 
@@ -46,6 +47,7 @@ export default function Cadastro() {
   }
 
   async function cadastrar() {
+    console.log(data);
     const response = await cadastrarPaciente({
       cpf: data.cpf,
       nome: data.nome,
@@ -99,6 +101,7 @@ export default function Cadastro() {
             <TouchableOpacity
               onPress={() => handlePress(checkbox.id)}
               style={styles.container}
+              key={checkbox.id}
             >
               <View
                 style={[
@@ -119,7 +122,7 @@ export default function Cadastro() {
         </Botao>
       )}
       <Botao onPress={() => avancarSecao()} mt={4} mb={20}>
-        Avançar
+        {numSecao==2 ?"Finalizar": "Avançar"}
       </Botao>
     </ScrollView>
   );

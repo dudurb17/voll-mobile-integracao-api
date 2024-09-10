@@ -52,13 +52,13 @@ const secoes = [
         id: 1,
         label: 'CEP',
         placeholder: 'Insira seu CEP',
-        name:'confirmaSenha'
+        name:'cep'
       },
       {
         id: 2,
         label: 'Rua',
         placeholder: 'Nome da rua',
-        name:"NomeRua"
+        name:"rua"
       },
       {
         id: 3,
@@ -70,7 +70,7 @@ const secoes = [
         id: 4,
         label: 'Complemento',
         placeholder: 'Insira seu complemento',
-        name:'complete'
+        name:'complemento'
       },
       {
         id: 5,
