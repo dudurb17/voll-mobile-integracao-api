@@ -6,6 +6,7 @@ import { EntradaTexto } from "./componentes/EntradaTexto";
 import { Titulo } from "./componentes/Titulo";
 import { secoes } from "./utils/CadastroEntradaTexto";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { cadastrarPaciente } from "./services/PacienteServices";
 
 export default function Cadastro() {
   const [numSecao, setNumSecao] = useState(0);
@@ -42,6 +43,30 @@ export default function Cadastro() {
 
   function updateData(id: string, valor: string) {
     setData({ ...data, [id]: valor });
+  }
+
+  async function cadastrar() {
+    const response = await cadastrarPaciente({
+      cpf: data.cpf,
+      nome: data.nome,
+      email: data.email,
+      endereco: {
+        cep: data.cep,
+        rua: data.rua,
+        numero: data.numero,
+        estado: data.estado,
+        complemento: data.complemento,
+      },
+      senha: data.senha,
+      telefone: data.telefone,
+      possuiPlanoSaude: planos.length > 0,
+      planosSaude: planos,
+      imagem: data.imagem,
+    });
+
+    if(!response){
+      console.log("error")
+    }
   }
 
   return (

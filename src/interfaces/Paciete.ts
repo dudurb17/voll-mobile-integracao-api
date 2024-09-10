@@ -2,7 +2,7 @@ export interface Paciente {
   cpf: string;
   nome: string;
   email: string;
-  endereco: {};
+  endereco: Endereco;
   senha: string;
   telefone: string;
   possuiPlanoSaude: boolean;
