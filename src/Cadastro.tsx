@@ -1,4 +1,4 @@
-import { Image, Text, Box, ScrollView } from "native-base";
+import { Image, Text, Box, ScrollView, useToast } from "native-base";
 import { useState } from "react";
 import Logo from "./assets/Logo.png";
 import { Botao } from "./componentes/Botao";
@@ -12,6 +12,8 @@ export default function Cadastro() {
   const [numSecao, setNumSecao] = useState(0);
   const [data, setData] = useState({} as any);
   const [planos, setPlanos] = useState([] as number[]);
+  const toast = useToast();
+
 
   const handlePress = (id: number) => {
     setPlanos((prevPlanos) => {
@@ -68,6 +70,13 @@ export default function Cadastro() {
 
     if(!response){
       console.log("error")
+
+      toast.show({
+        title: "Erro no cadastro",
+        description: "Erro no cadastrar, tente novamente mais tarde!",
+        backgroundColor: "red.500"
+      })
+
     }
   }
 

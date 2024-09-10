@@ -13,7 +13,6 @@ export default function Login({ navigation }: any) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [loading, setLoading] = useState(true);
-  const url =process.env.EXPO_PUBLIC_API_URL
 
   const toast = useToast();
 
