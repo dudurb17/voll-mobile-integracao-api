@@ -14,3 +14,13 @@ export async function cadastrarPaciente(paciente: Paciente) {
     return null;
   }
 }
+
+export async function pegarDadosPaciente(id: string) {
+  try {
+    const response = await api.get(`/paciente/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
