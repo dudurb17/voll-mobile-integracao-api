@@ -15,10 +15,10 @@ export async function cadastrarPaciente(paciente: Paciente) {
   }
 }
 
-export async function pegarDadosPaciente(id: string) {
+export async function pegarDadosPaciente(id: string): Promise<Paciente | null> {
   try {
     const response = await api.get(`/paciente/${id}`);
-    return response.data;
+    return response.data as Paciente;
   } catch (error) {
     console.log(error);
     return null;
