@@ -68,6 +68,7 @@ export default function Explorar() {
               especialidade={especialista.especialidade}
               foto={especialista.imagem}
               nome={especialista.nome}
+              // onPress={especialista.id}
             />
           </VStack>
         ))}
