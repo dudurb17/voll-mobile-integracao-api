@@ -6,8 +6,9 @@ import { Titulo } from "../componentes/Titulo";
 import { useState } from "react";
 import { buscarEspecialistaPorEstado } from "../services/EspecialistaServico";
 import { Especialista } from "../interfaces/Especialista";
+import { NavigationProps } from "../@types/navigation";
 
-export default function Explorar() {
+export default function Explorar({ navigation }: NavigationProps<'Explorar'>) {
   const [estado, setEstado] = useState("");
   const [especialidade, setEspecialidade] = useState("");
 
@@ -68,7 +69,9 @@ export default function Explorar() {
               especialidade={especialista.especialidade}
               foto={especialista.imagem}
               nome={especialista.nome}
-              // onPress={especialista.id}
+              onPress={()=>navigation.navigate('Agendamento', {
+                especialistaId: especialista.id
+              })}
             />
           </VStack>
         ))}

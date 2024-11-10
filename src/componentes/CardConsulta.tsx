@@ -30,7 +30,9 @@ export function CardConsulta({
           <Text>{data}</Text>
         </VStack>
       </VStack>
-      <Botao mt={4} onPress={onPress}>
+      <Botao mt={4} onPress={onPress}
+
+      >
         {foiAgendado ? 'Cancelar' : 'Agendar consulta'}
       </Botao>
     </VStack>

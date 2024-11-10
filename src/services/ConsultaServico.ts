@@ -17,3 +17,13 @@ export async function agendarConsulta(
     return null;
   }
 }
+
+export async function deletConsulta(id: string) {
+  try {
+    const response = await api.delete('/consulta/' + id)
+    return response.data
+  } catch (error) {
+    console.log(error)
+    return null
+  }
+}

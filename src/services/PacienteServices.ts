@@ -24,3 +24,13 @@ export async function pegarDadosPaciente(id: string): Promise<Paciente | null> {
     return null;
   }
 }
+
+export async function pegarConsultasPaciente(id: string): Promise<Paciente | null> {
+  try {
+    const response = await api.get(`/paciente/${id}/consultas`);
+    return response.data as Paciente;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}

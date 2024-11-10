@@ -1,7 +1,7 @@
 import { Input, VStack, useToast } from 'native-base'
 import { useState } from 'react'
 import { Botao } from './componentes/Botao'
-import { agendarConsulta } from './servicos/ConsultaServico'
+import { agendarConsulta } from './services/ConsultaServico'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { converterStringParaData } from './utils/conversoes'
 
