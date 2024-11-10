@@ -36,7 +36,7 @@ export default function Perfil({navigation}:any) {
 
         <Avatar
           size="xl"
-          source={{ uri: "https://github.com/andreocunha.png" }}
+          source={{ uri: "https://github.com/dudurb17.png" }}
           mt={5}
         />
 

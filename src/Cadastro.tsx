@@ -8,7 +8,7 @@ import { secoes } from "./utils/CadastroEntradaTexto";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { cadastrarPaciente } from "./services/PacienteServices";
 
-export default function Cadastro() {
+export default function Cadastro({ navigation }: any) {
   const [numSecao, setNumSecao] = useState(0);
   const [data, setData] = useState({} as any);
   const [planos, setPlanos] = useState([] as number[]);
@@ -77,6 +77,15 @@ export default function Cadastro() {
         backgroundColor: "red.500"
       })
 
+    }
+    if(response){
+     
+      toast.show({
+        title: "Parabéns",
+        description: "Criado com sucesso",
+        backgroundColor: "green.500"
+      })
+      navigation.replace('Login')
     }
   }
 
