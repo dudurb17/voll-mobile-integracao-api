@@ -1,4 +1,4 @@
-import { VStack, Divider, ScrollView } from 'native-base'
+import { VStack, Divider, ScrollView, useToast } from 'native-base'
 import { Botao } from '../componentes/Botao'
 import { CardConsulta } from '../componentes/CardConsulta'
 import { Titulo } from '../componentes/Titulo'
@@ -22,6 +22,7 @@ interface Consulta {
 }
 
 export default function Consultas() {
+  const toast = useToast()
 
   const [consultasProximas, setConsultasProximas] = useState<Consulta[]>([])
   const [consultasPassadas, setConsultasPassadas] = useState<Consulta[]>([])
@@ -30,7 +31,7 @@ export default function Consultas() {
     const pacienteId = await AsyncStorage.getItem('pacienteId')
     if (!pacienteId) return;
 
-    const todasConsultas: Consulta[] = await pegarConsultasPaciente(pacienteId)
+    const todasConsultas: Consulta[] = await pegarConsultasPaciente(pacienteId) as unknown as Consulta[]
     const agora = new Date();
 
     const proximas = todasConsultas.filter((consulta) => new Date(consulta.data
@@ -53,10 +54,17 @@ export default function Consultas() {
       const response = await deletConsulta(id)
       if(response){
         console.log(response)
+        toast.show({
+          title: 'Consulta cancelada com sucesso',
+          backgroundColor: 'red.500',
+        })
         pegarConsultas()
       }
     } catch (error) {
-      
+      toast.show({
+        title: 'Algo deu errado',
+        backgroundColor: 'red.500',
+      })
     }
   }
   return (

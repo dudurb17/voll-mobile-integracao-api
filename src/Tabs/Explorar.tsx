@@ -8,9 +8,11 @@ import { buscarEspecialistaPorEstado } from "../services/EspecialistaServico";
 import { Especialista } from "../interfaces/Especialista";
 import { NavigationProps } from "../@types/navigation";
 
+
 export default function Explorar({ navigation }: NavigationProps<'Explorar'>) {
   const [estado, setEstado] = useState("");
   const [especialidade, setEspecialidade] = useState("");
+  
 
   const [resultado, setResultado] = useState([]);
 
